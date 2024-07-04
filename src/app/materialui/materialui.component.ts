@@ -52,7 +52,7 @@ export class MaterialuiComponent {
   deleteEmployee(id: number){
     this._empService.deleteEmployee(id).subscribe({
       next:(res)=>{
-        this._coreService.openSnackBar('Employee Deleted!', 'Ok');
+        this._coreService.openSnackBar('Employee Deleted Successfully!', 'Ok');
         this.getAllEmployees();
       },
       error: (err)=>{
