@@ -1,3 +1,3 @@
 [build]
   publish = "dist/angular-material-ui"
-  command = "ng build --prod"
+  command = "ng build --configuration production"
