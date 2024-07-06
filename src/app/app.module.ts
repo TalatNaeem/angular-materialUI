@@ -22,13 +22,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MaterialuiComponent } from './materialui/materialui.component';
+import { ConfirmationdialogComponent } from './confirmationdialog/confirmationdialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     EmpAddEditComponent,
-    MaterialuiComponent
+    MaterialuiComponent,
+    ConfirmationdialogComponent
   ],
   imports: [
     BrowserModule,

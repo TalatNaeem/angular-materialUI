@@ -7,23 +7,31 @@
             <mat-form-field appearance="outline">
                 <mat-label>First Name</mat-label>
                 <input matInput type="text" placeholder="eg. name" formControlName="firstname">
+                <mat-error *ngIf="empForm.get('firstname').errors?.['required'] && empForm.get('firstname').touched">*First name is required field.</mat-error>
+                <mat-error *ngIf="empForm.get('firstname').errors?.['noSpaceAllowed'] && empForm.get('firstname').dirty">*Empty space(s) not allowed.</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Last Name</mat-label>
                 <input matInput type="text" placeholder="eg. name" formControlName="lastname">
+                <mat-error *ngIf="empForm.get('lastname').errors?.['required'] && empForm.get('lastname').touched">*Last name is required field.</mat-error>
+                <mat-error *ngIf="empForm.get('lastname').errors?.['noSpaceAllowed'] && empForm.get('lastname').dirty">*Empty space(s) not allowed.</mat-error>
             </mat-form-field>
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput type="email" placeholder="test@gmail.com" formControlName="email">
+                <mat-error *ngIf="empForm.get('email').errors?.['required'] && empForm.get('email').touched">*Email is required.</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Date Of Birth</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="dob">
+                <input matInput [matDatepicker]="picker" formControlName="dob" [max]="currentDate">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="empForm.get('dob').errors?.['required'] && empForm.get('dob').touched">*DOB is required.</mat-error>
+                <mat-error *ngIf="empForm.get('dob').errors?.['ageInvalid'] && empForm.get('dob').dirty">*Age must be > 20.</mat-error>
+                <!-- <mat-error *ngIf="empForm.get('dob').errors?.['ageFuture'] && empForm.get('dob').dirty">*No Future Date allowed.</mat-error> -->
             </mat-form-field>          
         </div>
         <div class="row">
@@ -40,21 +48,27 @@
                 <mat-select formControlName="education">
                     <mat-option *ngFor="let val of education" [value]="val">{{val}}</mat-option>
                 </mat-select>
+                <mat-error *ngIf="empForm.get('education').errors?.['required'] && empForm.get('education').touched">*Education is required.</mat-error>
             </mat-form-field> 
             <mat-form-field appearance="outline">
                 <mat-label>Company Name</mat-label>
                 <input matInput type="text" placeholder="eg. google" formControlName="companyname">
+                <mat-error *ngIf="empForm.get('companyname').errors?.['required'] && empForm.get('companyname').touched">*Company Name is required.</mat-error>
             </mat-form-field>        
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Experience</mat-label>
-                <input matInput type="number" placeholder="eg. 4" formControlName="experience">
+                <input matInput type="number" placeholder="eg. 4" formControlName="experience" [min]="0">
+                <mat-error *ngIf="empForm.get('experience').errors?.['required'] && empForm.get('experience').touched">*Experience is required.</mat-error>
+                <mat-error *ngIf="empForm.get('experience').errors?.['minValueOne'] && empForm.get('experience').dirty">*Must be greater than 0.</mat-error>
             </mat-form-field>      
             <mat-form-field appearance="outline">
                 <mat-label>Package</mat-label>
-                <input matInput type="number" placeholder="eg. 12" formControlName="package">
+                <input matInput type="number" placeholder="eg. 12" formControlName="package" [min]="0">
                 <mat-hint>In Rupees</mat-hint>
+                <mat-error *ngIf="empForm.get('package').errors?.['required'] && empForm.get('package').touched">*Package is required.</mat-error>
+                <mat-error *ngIf="empForm.get('package').errors?.['minValueOne'] && empForm.get('package').dirty">*Must be greater than 0.</mat-error>
             </mat-form-field>      
         </div>
     </div>

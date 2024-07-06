@@ -4,6 +4,7 @@ import { EmployeeService } from '../services/employee.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreService } from '../core/core.service';
+import { CustomValidator } from '../Validators/noSpaceAllowed.validator';
 
 @Component({
   selector: 'app-emp-add-edit',
@@ -11,6 +12,7 @@ import { CoreService } from '../core/core.service';
   styleUrls: ['./emp-add-edit.component.css']
 })
 export class EmpAddEditComponent implements OnInit{
+  currentDate = new Date();
   education: string[]=[
     'Matric',
     'Diploma',
@@ -29,15 +31,15 @@ export class EmpAddEditComponent implements OnInit{
 
   ngOnInit() {
       this.empForm = new FormGroup({
-        firstname: new FormControl(''),
-        lastname: new FormControl(''),
-        email: new FormControl(''),
-        dob: new FormControl(''),
-        gender: new FormControl(''),
-        education: new FormControl(''),
-        companyname: new FormControl(''),
-        experience: new FormControl(''),
-        package: new FormControl(''),
+        firstname: new FormControl('', [Validators.required, CustomValidator.NoSpaceAllowed]),
+        lastname: new FormControl('', [Validators.required, CustomValidator.NoSpaceAllowed]),
+        email: new FormControl('', Validators.required),
+        dob: new FormControl('', [Validators.required, CustomValidator.AgeValidator]),
+        gender: new FormControl('', Validators.required),
+        education: new FormControl('', Validators.required),
+        companyname: new FormControl('', Validators.required),
+        experience: new FormControl('', [Validators.required, CustomValidator.minValueOne]),
+        package: new FormControl('',[Validators.required, CustomValidator.minValueOne]),
       });
 
       if(this.data)

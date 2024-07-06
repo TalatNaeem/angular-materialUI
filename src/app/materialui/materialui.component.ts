@@ -8,6 +8,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { CoreService } from '.././core/core.service';
+import { ConfirmationdialogComponent } from '../confirmationdialog/confirmationdialog.component';
 
 @Component({
   selector: 'app-materialui',
@@ -49,16 +50,30 @@ export class MaterialuiComponent {
     })
   }
 
-  deleteEmployee(id: number){
-    this._empService.deleteEmployee(id).subscribe({
-      next:(res)=>{
-        this._coreService.openSnackBar('Employee Deleted Successfully!', 'Ok');
-        this.getAllEmployees();
-      },
-      error: (err)=>{
-        console.log(err);
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this._dialog.open(ConfirmationdialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+  deleteEmployee(id: number, name: string){
+    const dialogRef = this._dialog.open(ConfirmationdialogComponent, {
+      data: name
+    });
+    dialogRef.afterClosed().subscribe({next: (val)=>{
+      if(val){
+        this._empService.deleteEmployee(id).subscribe({
+          next:(res)=>{
+            this._coreService.openSnackBar('Employee Deleted Successfully!', 'Ok');
+            this.getAllEmployees();
+          },
+          error: (err)=>{
+            console.log(err);
+          }
+        })
       }
-    })
+    }})
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
