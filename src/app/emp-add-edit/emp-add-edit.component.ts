@@ -33,7 +33,7 @@ export class EmpAddEditComponent implements OnInit{
       this.empForm = new FormGroup({
         firstname: new FormControl('', [Validators.required, CustomValidator.NoSpaceAllowed]),
         lastname: new FormControl('', [Validators.required, CustomValidator.NoSpaceAllowed]),
-        email: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.email]),
         dob: new FormControl('', [Validators.required, CustomValidator.AgeValidator]),
         gender: new FormControl('', Validators.required),
         education: new FormControl('', Validators.required),

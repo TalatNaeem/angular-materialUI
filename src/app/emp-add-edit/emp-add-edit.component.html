@@ -22,10 +22,12 @@
                 <mat-label>Email</mat-label>
                 <input matInput type="email" placeholder="test@gmail.com" formControlName="email">
                 <mat-error *ngIf="empForm.get('email').errors?.['required'] && empForm.get('email').touched">*Email is required.</mat-error>
+                <mat-error *ngIf="empForm.get('email').errors?.['email'] && empForm.get('email').touched">*Not a valid Email.</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Date Of Birth</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="dob" [max]="currentDate">
+                <input matInput [matDatepicker]="picker" formControlName="dob" [max]="currentDate" [readonly]="true"
+                (click)="picker.open()" (focus)="picker.open()">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -40,6 +42,7 @@
                 <mat-radio-button value="male">Male</mat-radio-button>
                 <mat-radio-button value="female">Female</mat-radio-button>
                 <mat-radio-button value="others">Others</mat-radio-button>
+                <mat-error *ngIf="empForm.get('gender').errors?.['required'] && empForm.get('gender').dirty">*Select Gender.</mat-error>
             </mat-radio-group>         
         </div>
         <div class="row">
