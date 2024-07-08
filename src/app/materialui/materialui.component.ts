@@ -19,6 +19,7 @@ export class MaterialuiComponent {
 
   displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'dob', 'gender', 'education', 'company', 'experience', 'package', 'action'];
   dataSource!: MatTableDataSource<any>;
+  loading: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -38,11 +39,13 @@ export class MaterialuiComponent {
   }
 
   getAllEmployees(){
+    this.loading = true;
     this._empService.getAllEmployee().subscribe({
       next: (res)=>{
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        this.loading = false;
       },
       error: (err)=>{
         console.log(err);

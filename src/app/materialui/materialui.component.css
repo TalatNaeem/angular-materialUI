@@ -4,9 +4,26 @@
 
 .main-body{
 max-width: 1248px;
-padding-top: 20px;
-margin: 0, auto;
+padding-top: auto;
+margin: auto;
 mat-form-field{
   width: 100%;
 }
+}
+
+.table-container {
+  position: relative;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 2;
 }

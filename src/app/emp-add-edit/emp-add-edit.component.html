@@ -42,7 +42,7 @@
                 <mat-radio-button value="male">Male</mat-radio-button>
                 <mat-radio-button value="female">Female</mat-radio-button>
                 <mat-radio-button value="others">Others</mat-radio-button>
-                <mat-error *ngIf="empForm.get('gender').errors?.['required'] && empForm.get('gender').dirty">*Select Gender.</mat-error>
+                <mat-error *ngIf="empForm.get('gender').errors?.['required'] && empForm.get('gender').touched">*Gender is required.</mat-error>
             </mat-radio-group>         
         </div>
         <div class="row">
@@ -77,6 +77,9 @@
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-        <button mat-raised-button color="primary" type="submit">{{data? 'Update' : 'Save'}}</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+            <span *ngIf="!loading">{{data? 'Update' : 'Save'}}</span>
+            <mat-spinner *ngIf="loading" diameter="20">{{data? 'Update' : 'Save'}}</mat-spinner>
+        </button>
     </div>
 </form>

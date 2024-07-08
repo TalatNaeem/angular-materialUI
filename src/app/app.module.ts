@@ -23,6 +23,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MaterialuiComponent } from './materialui/materialui.component';
 import { ConfirmationdialogComponent } from './confirmationdialog/confirmationdialog.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { ConfirmationdialogComponent } from './confirmationdialog/confirmationdi
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
